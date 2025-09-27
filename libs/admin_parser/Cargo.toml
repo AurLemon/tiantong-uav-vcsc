@@ -1,0 +1,20 @@
+[package]
+name = "admin_parser"
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.81"
+
+[package.metadata.docs.rs]
+features = ["default"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[lib]
+name = "admin_parser"
+path = "src/lib.rs"
+
+[dependencies]
+anyhow = { version = "1.0" }
+serde = { version = "1", features = ["derive"] }
+indexmap = { version = "2", features = ["serde"] }
+toml = { version = "0.8", features = ["preserve_order"] }
+walkdir = { version = "2.5.0", default-features = false }

@@ -1,0 +1,51 @@
+[workspace]
+members = [".", "libs/admin_parser"]
+
+[package]
+name = "tiantong-uav-vcsc-backend"
+version = "1.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+migration = { path = "libs/migration" }
+admin_parser = { path = "libs/admin_parser" }
+sea-orm = { version = "1.1.5", features = ["runtime-tokio-rustls", "macros", "debug-print"] }
+seaography = { version = "1.1.4", features = ["with-decimal", "with-chrono", "with-uuid", "field-snake-case"] }
+loco-rs = { version = "0.14" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+eyre = "0.6"
+tokio = { version = "1.33.0", default-features = false }
+tokio-util = "0.7.11"
+tokio-tungstenite = "0.21"
+futures-util = "0.3"
+async-trait = "0.1.74"
+tracing = "0.1.40"
+chrono = "0.4"
+rumqttc = "0.24"
+url = "2.5"
+async-graphql-axum = { version = "7.0" }
+tower-service = { version = "0.3" }
+axum = { version = "0.8", features = ["multipart"] }
+uuid = { version = "1.6.0", features = ["v4"] }
+dotenvy = "0.15.7"
+base64 = "0.22.1"
+csv = "1.3"
+encoding_rs = "0.8"
+encoding_rs_io = "0.1"
+
+[dev-dependencies]
+loco-rs = { version = "0.14", features = ["testing"] }
+serial_test = { version = "3.1" }
+
+[features]
+default = ["sqlx-sqlite"]
+sqlx-mysql = ["sea-orm/sqlx-mysql"]
+sqlx-postgres = ["sea-orm/sqlx-postgres"]
+sqlx-sqlite = ["sea-orm/sqlx-sqlite"]
+
+[[bin]]
+name = "tiantong-uav-vcsc-backend-cli"
+path = "src/bin/main.rs"
+required-features = []
